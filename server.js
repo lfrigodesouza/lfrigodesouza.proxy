@@ -3,6 +3,7 @@ import cors from 'cors';
 import fetch from 'node-fetch';
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 const whitelist = ['https://lfrigodesouza.net', 'https://www.lfrigodesouza.net'];
 
 if (process.env.NODE_ENV === 'production') {
@@ -26,4 +27,4 @@ app.get('/blog/content', async (req, res) => res.send(
     .then((data) => data),
 ));
 
-app.listen(80, () => console.log('Example app is listening on port 80.'));
+app.listen(PORT, () => console.log(`Listening on port ${PORT}.`));
