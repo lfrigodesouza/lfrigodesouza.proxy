@@ -4,22 +4,22 @@ import fetch from 'node-fetch';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const whitelist = ['https://lfrigodesouza.net', 'https://www.lfrigodesouza.net'];
+// const whitelist = ['https://lfrigodesouza.net', 'https://www.lfrigodesouza.net'];
 
-if (process.env.NODE_ENV === 'production') {
-  const corsOptions = {
-    origin(origin, callback) {
-      if (whitelist.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-  };
-  app.use(cors(corsOptions));
-} else {
-  app.use(cors());
-}
+// if (process.env.NODE_ENV === 'production') {
+//   const corsOptions = {
+//     origin(origin, callback) {
+//       if (whitelist.indexOf(origin) !== -1) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error('Not allowed by CORS'));
+//       }
+//     },
+//   };
+//   app.use(cors(corsOptions));
+// } else {
+app.use(cors());
+// }
 
 app.get('/blog/content', async (req, res) => res.send(
   await fetch('https://blog.lfrigodesouza.net/content.json')
