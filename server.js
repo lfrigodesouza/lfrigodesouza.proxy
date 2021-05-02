@@ -27,4 +27,13 @@ app.get('/blog/content', async (req, res) => res.send(
     .then((data) => data),
 ));
 
+app.get('/blog/posts', async (req, res) => {
+  const page = Number.parseInt(req.query.page || 0, 10);
+  const limit = Number.parseInt(req.query.limit || 5, 10);
+  const content = await fetch('https://blog.lfrigodesouza.net/content.json')
+    .then((response) => response.json())
+    .then((data) => data);
+  res.send(content.posts.slice(page * limit, (page + 1) * limit));
+});
+
 app.listen(PORT, () => console.log(`Listening on port ${PORT}.`));
